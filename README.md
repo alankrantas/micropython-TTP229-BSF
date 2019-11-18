@@ -39,7 +39,7 @@ keypad = Keypad(scl=scl_pin, sdo=sdo_pin, inputs=16, multi=False)
 while True:
     print(keypad.read())
     # return a index number like 15 in single mode
-    # return a list like [0, 1, 14, 15] in multiple mode
+    # return a list like [0, 2, 11, 15] in multiple mode
 ```
 
 <b>input</b> parameter:
@@ -58,11 +58,11 @@ In multiple mode keypad.read() will return a list containing all the indexes of 
 
 If the TTP229-BSF is configured to multiple mode, read it in single mode will return the lowest index of all pressed keys. Read in multiple mode for a keypad configured in single mode, you'll get a list containing only one key index if any key is pressed.
 
-There's also a <b>raw</b> parameter, default False. When set as True, keypad.read() will return the raw 8 or 16 key list indicating all keys' status (1=not pressed, 0=pressed).
+There's also a <b>raw</b> parameter, default False. When set as True, keypad.read() will return the raw 8 or 16 key list indicating all keys' status (from key 0 to 15; value 1 = not pressed, 0 = pressed).
 
 ```python
 keypad = Keypad(scl=scl_pin, sdo=sdo_pin, inputs=16, multi=False, raw=True)
-# return a list like [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+# return a list like [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0]
 
 while True:
     print(keypad.read())
