@@ -16,7 +16,7 @@ TTP229-BSF's serial interface supports either 8 or 16 key mode (see [datasheet](
 * TP3 and TP4 not connected: single key mode
 * TP3 and TP4 both connected (pulled low): multiple key mode
 
-Without any modification the TTP229-BSF is in 8-key/single mode. Connect the pins by wires or soldering to enable these options.
+Without any modification the TTP229-BSF is in 8-key/single mode. Connect the TPx pins by wires or soldering to enable these options.
 
 ## Wiring
 
