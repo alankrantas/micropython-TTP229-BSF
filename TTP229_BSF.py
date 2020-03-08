@@ -24,7 +24,7 @@ class Keypad:
             utime.sleep_ms(1)
         utime.sleep_ms(1)
         if self._raw_mode:
-            return key
+            return tuple(key)
         else:
             if self._multi_mode:
                 key_multi = []
