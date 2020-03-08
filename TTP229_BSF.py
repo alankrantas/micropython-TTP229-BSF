@@ -1,7 +1,6 @@
-# MicroPython driver for TTP229-BSF 16-key capacitive keypad in serial interface mode
+# MicroPython ESP8266 driver for TTP229-BSF 16-key capacitive keypad in serial interface mode
 # by Alan Wang
 
-from machine import Pin
 import utime
 
 class Keypad:
@@ -14,9 +13,7 @@ class Keypad:
         self._raw_mode = raw
     
     def read(self):
-        key = []
-        for i in range(self._inputs):
-            key.append(1)
+        key = [1] * self._inputs
         self._scl_pin.on()
         utime.sleep_ms(1)
         for i in range(self._inputs):
@@ -34,7 +31,7 @@ class Keypad:
                 for i in range(self._inputs):
                     if key[i] == 0:
                         key_multi.append(i)
-                return key_multi
+                return tuple(key_multi)
             else:
                 key_single = -1
                 for i in range(self._inputs):
