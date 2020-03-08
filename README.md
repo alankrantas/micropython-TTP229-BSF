@@ -10,6 +10,8 @@ TTP229-BSF's serial interface supports either 8 or 16 key mode (see [datasheet](
 
 ![11-1035x1200](https://user-images.githubusercontent.com/44191076/69064016-6ec49c00-0a58-11ea-9b46-c10f4f1a9cdf.jpg)
 
+**Connect these places with either simple wires or soldering. Do not use resistors.**
+
 * TP2 not connected: 8 keys
 * TP2 connected (pulled low): 16 keys
 
@@ -20,7 +22,7 @@ Without any modification the TTP229-BSF is in 8-key/single mode. Connect the TPx
 
 ## Wiring
 
-* VCC: 3.3V or 5V
+* VCC: 3.3V
 * GND: GND
 * SCL: scl pin (output)
 * SDO (not SDA): sdo pin (input)
@@ -39,18 +41,18 @@ keypad = Keypad(scl=scl_pin, sdo=sdo_pin, inputs=16, multi=False)
 while True:
     print(keypad.read())
     # return a index number like 15 in single mode
-    # return a list like [0, 2, 11, 15] in multiple mode
+    # return a list like (0, 2, 11, 15) in multiple mode
 ```
 
 <b>input</b> parameter:
 
-* input=8 (default): 8 key mode
-* input=16: 16 key mode
+* **input=8** (default): 8 key mode
+* **input=16**: 16 key mode
 
 <b>multi</b> parameter:
 
-* multi=False (default): single mode
-* multi=True: multiple mode
+* **multi=False** (default): single mode
+* **multi=True**: multiple mode
 
 In single mode keypad.read() will return the index of the pressed key (0~15). Return -1 when no key is pressed.
 
@@ -62,7 +64,7 @@ There's also a <b>raw</b> parameter, default False. When set as True, keypad.rea
 
 ```python
 keypad = Keypad(scl=scl_pin, sdo=sdo_pin, inputs=16, multi=False, raw=True)
-# return a list like [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0]
+# return a list like (0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
 
 while True:
     print(keypad.read())
