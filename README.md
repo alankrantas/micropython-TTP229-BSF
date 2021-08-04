@@ -1,6 +1,6 @@
 # MicroPython ESP8266/ESP32 Driver for TTP229-BSF 16-key Capacitive Keypad in Serial Interface Mode
 
-This MicroPython driver is for TTP229-BSF capacitive keypad on ESP8266/ESP3. Tested on both ESP8266 (WeMos D1 mini) and ESP32 (BPI:bit) with v1.11 firmware.
+This MicroPython driver is for TTP229-BSF capacitive keypad on ESP8266/ESP32. Tested on both ESP8266 (WeMos D1 mini) and ESP32 (BPI:bit) with v1.11 firmware.
 
 The serial interface of TTP229-BSF <b>is not I2C</b> but it allows you to control this keypad via only 2 wires. Not to be confused with TTP229-LSF, which is a true I2C device.
 
@@ -44,7 +44,9 @@ while True:
     # return a list like (0, 2, 11, 15) in multiple mode
 ```
 
-<b>input</b> parameter:
+## Parameter
+
+You can set the following initializing parameter:
 
 * **input=8** (default): 8 key mode
 * **input=16**: 16 key mode
@@ -54,13 +56,13 @@ while True:
 * **multi=False** (default): single mode
 * **multi=True**: multiple mode
 
-In single mode keypad.read() will return the index of the pressed key (0~15). Return -1 when no key is pressed.
+In single mode ```keypad.read()``` will return the index of the pressed key (0~15). Return -1 when no key is pressed.
 
-In multiple mode keypad.read() will return a list containing all the indexes of pressed keys. Return an empty list when no key is pressed.
+In multiple mode ```keypad.read()``` will return a list containing all the indexes of pressed keys. Return an empty list when no key is pressed.
 
 If the TTP229-BSF is configured to multiple mode, read it in single mode will return the lowest index of all pressed keys. Read in multiple mode for a keypad configured in single mode, you'll get a list containing only one key index if any key is pressed.
 
-There's also a <b>raw</b> parameter, default False. When set as True, keypad.read() will return the raw 8 or 16 key list indicating all keys' status (from key 0 to 15; value 1 = not pressed, 0 = pressed).
+There's also a <b>raw</b> parameter, default ```False```. When set as ```True```, ```keypad.read()``` will return the raw 8 or 16 key list indicating all keys' status (from key 0 to 15; value 1 = not pressed, 0 = pressed).
 
 ```python
 keypad = Keypad(scl=scl_pin, sdo=sdo_pin, inputs=16, multi=False, raw=True)
@@ -70,4 +72,4 @@ while True:
     print(keypad.read())
 ```
 
-If the keypad is configured to multiple mode and you read it in single/raw mode, you'll still get a list which shows multiple key pressing results.
+If the keypad is configured to multiple mode and you read it in single/raw mode, you'll still get a list which contains multiple key pressing results.
